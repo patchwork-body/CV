@@ -5,16 +5,181 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>kirill's Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+  <style>
+    body * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --hover-color: #e49732;
+    }
+
+    .root {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      color: #232324;
+      font-size: 14px;
+      font-family: 'Roboto Mono', monospace;
+    }
+
+    .root__title {
+      display: grid;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      justify-content: center;
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+
+    .root__subtitle {
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    .aside {
+      display: grid;
+      row-gap: 1rem;
+      height: 100vh;
+      padding: 8rem 0 2rem;
+      background-color: #f4f4f4;
+      grid-template-rows: auto;
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 720px) {
+      .aside {
+        display: none;
+      }
+
+      .root {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .aside__list {
+      display: grid;
+      row-gap: 0.2rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .aside__title {
+      font-size: 16px;
+      text-transform: uppercase;
+      border-bottom: 2px solid #232324;
+      margin-right: 0.5rem;
+      padding-bottom: 0.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .aside__skills__item {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 2rem;
+      align-items: center;
+      padding: 0.2rem 0 0.2rem 0.5rem;
+      border: 1px solid #f4f4f4;
+      margin-left: -0.5rem;
+    }
+
+    .aside__skills__item:hover {
+      color: var(--hover-color);
+      cursor: pointer;
+      background-color: rgba(228, 151, 50, 0.2);
+      border: 1px solid var(--hover-color);
+    }
+
+    .meter {
+      -webkit-appearance: none;
+      padding-top: 0.2rem;
+    }
+
+    .meter::-webkit-meter-bar {
+      background: none;
+      background-color: #fff;
+      height: 0.4rem;
+      padding: 1px;
+      border: 1px solid #3b3b3b;
+    }
+
+    .aside__skills__item:hover .meter::-webkit-meter-bar {
+      border-color: var(--hover-color);
+    }
+
+    .meter::-webkit-meter-optimum-value {
+      background: none;
+      background-color: #3b3b3b;
+      height: 0.4rem;
+    }
+
+    .aside__skills__item:hover .meter::-webkit-meter-optimum-value {
+      background-color: var(--hover-color);
+    }
+
+    .aside__info__item {
+      padding: 0.2rem 0;
+    }
+
+    .content {
+      position: relative;
+      margin-top: 2rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Kirill Korotkov - Software Developer</h1>
-  <aside>
-    <h2>Skills:</h2>
-    <ul>
-      <li>
-        <span>React.js</span>
-      </li>
-    </ul>
-  </aside>
+  <div class="root">
+    <aside class="aside">
+      <div>
+        <h2 class="aside__title">Skills, Tools & Methodologies</h2>
+
+        <ul class="aside__list aside__skills">
+          <li class="aside__skills__item">
+            <span>Typescript</span>
+            <meter class="meter" min="0" max="10" value="8" />
+          </li>
+
+          <li class="aside__skills__item">
+            <span>React.js</span>
+            <meter class="meter" min="0" max="10" value="7" />
+          </li>
+
+          <li class="aside__skills__item">
+            <span>GraphQL</span>
+            <meter class="meter" min="0" max="10" value="5" />
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="aside__title">Info</h2>
+
+        <ul class="aside__list aside__info">
+          <li class="aside__info__item">
+            <span>Email</span>
+            <a href="mailto: gugfug1@gmail.com">gugfug1@gmail.com</a>
+          </li>
+
+          <li class="aside__info__item">
+            <span>Timezone</span>
+            <span>UTC+3 (MSK)</span>
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="content">
+      <h1 class="root__title">
+        Kirill Korotkov
+        <span class="root__subtitle">Software Developer</span>
+      </h1>
+    </main>
+  </div>
 </body>
 </html>
