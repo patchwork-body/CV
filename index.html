@@ -14,13 +14,21 @@
       box-sizing: border-box;
     }
 
+    a {
+      color: #232324;
+    }
+
+    a:hover {
+      color: var(--hover-color);
+    }
+
     :root {
       --hover-color: #e49732;
     }
 
     .root {
       display: grid;
-      grid-template-columns: minmax(300px, 30%) 1fr;
+      grid-template-columns: minmax(320px, 30%) 1fr;
       color: #232324;
       font-size: 14px;
       font-family: 'Roboto Mono', monospace;
@@ -30,9 +38,6 @@
       display: grid;
       row-gap: 0.4rem;
       letter-spacing: 0.1rem;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
       justify-content: center;
       text-align: center;
       font-size: 20px;
@@ -50,20 +55,15 @@
       display: grid;
       row-gap: 4rem;
       height: 100vh;
-      padding: 8rem 0 2rem;
+      padding: 8rem 0;
       background-color: #f4f4f4;
       grid-template-rows: auto 1fr;
       justify-content: center;
     }
 
-    @media screen and (max-width: 720px) {
-      .aside {
-        display: none;
-      }
-
-      .root {
-        grid-template-columns: 1fr;
-      }
+    .aside__block {
+      display: grid;
+      align-content: start;
     }
 
     .aside__list {
@@ -74,22 +74,21 @@
     }
 
     .aside__title {
-      font-size: 16px;
-      text-transform: uppercase;
+      font-size: 1rem;
       border-bottom: 2px solid #232324;
-      margin-right: 0.5rem;
       padding-bottom: 0.2rem;
       margin-bottom: 1rem;
     }
 
     .aside__skills__item {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr auto;
       column-gap: 2rem;
       align-items: center;
-      padding: 0.2rem 0 0.2rem 0.5rem;
+      padding: 0.2rem 0.5rem;
       border: 1px solid #f4f4f4;
       margin-left: -0.5rem;
+      margin-right: -0.5rem;
     }
 
     .aside__skills__item:hover {
@@ -131,8 +130,68 @@
     }
 
     .content {
+      display: grid;
+      row-gap: 5rem;
       position: relative;
-      margin-top: 2rem;
+      grid-template-rows: auto 1fr;
+      margin-top: 4rem;
+      padding: 0 2rem 2rem;
+    }
+
+    .content__body {
+      display: grid;
+      align-content: start;
+      row-gap: 3rem;
+    }
+
+    .employee-histroy {
+      list-style: square;
+      padding-left: 1rem;
+    }
+
+    .employee-history__header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+    }
+
+    @media screen and (max-width: 780px) {
+      .root {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr auto;
+      }
+
+      .content {
+        order: 1;
+      }
+
+      .aside {
+        height: 100%;
+        order: 2;
+        padding: 3rem;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content;
+      }
+    }
+
+    @media screen and (max-width: 430px) {
+      .content {
+        font-size: 12px;
+        padding-left: 0.7rem;
+        padding-right: 0.7rem;
+      }
+
+      .aside {
+        font-size: 12px;
+        padding: 1.2rem 0.7rem 1rem;
+      }
+
+      .aside__title {
+        font-size: 11px;
+      }
+    }
+
+    .EOF {
+      place-self: end;
     }
   </style>
 </head>
@@ -140,7 +199,7 @@
   <div class="root">
     <aside class="aside">
       <div class="aside__block">
-        <h2 class="aside__title">Skills, Tools & Methodologies</h2>
+        <h2 class="aside__title">$ ls -al ./skills/ | head -6</h2>
 
         <ul class="aside__list aside__skills">
           <li class="aside__skills__item">
@@ -157,11 +216,26 @@
             <span>GraphQL</span>
             <meter class="meter" min="0" max="10" value="5" />
           </li>
+
+          <li class="aside__skills__item">
+            <span>Functional Programming</span>
+            <meter class="meter" min="0" max="10" value="6" />
+          </li>
+
+          <li class="aside__skills__item">
+            <span>Python</span>
+            <meter class="meter" min="0" max="10" value="4" />
+          </li>
+
+          <li class="aside__skills__item">
+            <span>Docker</span>
+            <meter class="meter" min="0" max="10" value="3" />
+          </li>
         </ul>
       </div>
 
       <div class="aside__block">
-        <h2 class="aside__title">Info</h2>
+        <h2 class="aside__title">$ cat .info_profile</h2>
 
         <ul class="aside__list aside__info">
           <li class="aside__info__item">
@@ -186,6 +260,41 @@
         Kirill Korotkov
         <span class="root__subtitle">Software Developer</span>
       </h1>
+
+      <div class="content__body">
+        <section>
+          <h2 class="aside__title">$ echo "$ABOUT_ME"</h2>
+          <p>Some Text about me</p>
+        </section>
+
+        <section>
+          <h2 class="aside__title">$ grep -i developer ./employee_history.csv</h2>
+
+          <ul class="employee-histroy">
+            <li>
+              <header class="employee-history__header">
+                <h3>Front-End Developer, <a href="https://ottofeller.com">ottofeller</a></h3>
+                <span>Remote</span>
+              </header>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="aside__title">$ gh repo list --source --public</h2>
+
+          <ul class="employee-histroy">
+            <li>
+              <header class="employee-history__header">
+                <h3>Front-End Developer, <a href="https://ottofeller.com">ottofeller</a></h3>
+                <span>Remote</span>
+              </header>
+            </li>
+          </ul>
+        </section>
+
+        <span class="EOF">EOF</span>
+     </div>
     </main>
   </div>
 </body>
