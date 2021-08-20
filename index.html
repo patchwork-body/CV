@@ -234,8 +234,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.aside__skills__item').forEach(clickedElement => {
         clickedElement.addEventListener('click', event => {
+          const alreadyClicked = clickedElement.classList.contains('highlighted')
+
           const allMarkedElements = document.querySelectorAll('[data-taglist]')
           allMarkedElements.forEach(element => element.classList.remove('highlighted'))
+
+          if(alreadyClicked) {
+            return
+          }
 
           for (const element of allMarkedElements.values()) {
             for (const tag of element.getAttribute('data-taglist').split(',')) {
