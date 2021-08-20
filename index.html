@@ -170,6 +170,7 @@
 
     .highlighted {
       position: relative;
+      z-index: 1;
     }
 
     .highlighted::before {
@@ -181,6 +182,7 @@
       position: absolute;
       background-color: rgba(228, 151, 50, 0.2);
       border: 1px solid var(--hover-color);
+      z-index: -1;
     }
 
     .inline-list li {
