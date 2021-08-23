@@ -55,7 +55,7 @@
       display: grid;
       row-gap: 4rem;
       height: 100vh;
-      padding: 8rem 0;
+      padding: 11.5rem 0;
       background-color: #f4f4f4;
       grid-template-rows: auto 1fr;
       justify-content: center;
@@ -94,8 +94,6 @@
     .aside__skills__item:hover {
       color: var(--hover-color);
       cursor: pointer;
-      background-color: rgba(228, 151, 50, 0.2);
-      border: 1px solid var(--hover-color);
     }
 
     .meter {
@@ -144,14 +142,55 @@
       row-gap: 3rem;
     }
 
-    .employee-histroy {
+    .about-me {
+      line-height: 1.15rem;
+    }
+
+    .content__list {
       list-style: square;
       padding-left: 1rem;
     }
 
-    .employee-history__header {
+    .content__list__item {
       display: grid;
+      row-gap: 0.5rem;
+    }
+
+    .content__list__header {
+      display: grid;
+      place-content: center;
       grid-template-columns: 1fr auto;
+    }
+
+    .content__list__main {
+      display: grid;
+      margin-top: 0.6rem;
+      row-gap: 0.5rem;
+    }
+
+    .highlighted {
+      position: relative;
+      z-index: 1;
+    }
+
+    .highlighted::before {
+      content: '';
+      top: -0.2rem;
+      height: 1.5rem;
+      left: -2.5%;
+      width: 105%;
+      position: absolute;
+      background-color: rgba(228, 151, 50, 0.2);
+      border: 1px solid var(--hover-color);
+      z-index: -1;
+    }
+
+    .inline-list li {
+      display: inline;
+    }
+
+    .EOF {
+      place-self: end;
     }
 
     @media screen and (max-width: 780px) {
@@ -189,11 +228,34 @@
         font-size: 11px;
       }
     }
-
-    .EOF {
-      place-self: end;
-    }
   </style>
+
+  <script async defer type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.aside__skills__item').forEach(clickedElement => {
+        clickedElement.addEventListener('click', event => {
+          const alreadyClicked = clickedElement.classList.contains('highlighted')
+
+          const allMarkedElements = document.querySelectorAll('[data-taglist]')
+          allMarkedElements.forEach(element => element.classList.remove('highlighted'))
+
+          if(alreadyClicked) {
+            return
+          }
+
+          for (const element of allMarkedElements.values()) {
+            for (const tag of element.getAttribute('data-taglist').split(',')) {
+              if (tag === clickedElement.textContent.trim().toLowerCase()) {
+                element.classList.add('highlighted')
+                break
+              }
+            }
+          }
+        })
+      })
+    })
+  </script>
+
 </head>
 <body>
   <div class="root">
@@ -202,32 +264,32 @@
         <h2 class="aside__title">$ ls -al ./skills/ | head -6</h2>
 
         <ul class="aside__list aside__skills">
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="typescript">
             <span>Typescript</span>
             <meter class="meter" min="0" max="10" value="8" />
           </li>
 
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="react.js">
             <span>React.js</span>
             <meter class="meter" min="0" max="10" value="7" />
           </li>
 
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="graphql">
             <span>GraphQL</span>
             <meter class="meter" min="0" max="10" value="5" />
           </li>
 
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="functional programming">
             <span>Functional Programming</span>
             <meter class="meter" min="0" max="10" value="6" />
           </li>
 
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="python">
             <span>Python</span>
             <meter class="meter" min="0" max="10" value="4" />
           </li>
 
-          <li class="aside__skills__item">
+          <li class="aside__skills__item" data-taglist="docker">
             <span>Docker</span>
             <meter class="meter" min="0" max="10" value="3" />
           </li>
@@ -264,18 +326,29 @@
       <div class="content__body">
         <section>
           <h2 class="aside__title">$ echo "$ABOUT_ME"</h2>
-          <p>Some Text about me</p>
+
+          <p class="about-me">
+            Right now most of my experience relates to web development, but I am also interested in cryptocurrency and
+            machine learning. At least 3 hours a day (not in work time) I spend on my self-education.
+            I prefer to work remotely until you are wanna invite me to New Zealand.
+            In that case, relocation sounds appropriate.
+          </p>
         </section>
 
         <section>
           <h2 class="aside__title">$ grep -i developer ./employee_history.csv</h2>
 
-          <ul class="employee-histroy">
+          <ul class="content__list">
             <li>
-              <header class="employee-history__header">
-                <h3>Front-End Developer, <a href="https://ottofeller.com">ottofeller</a></h3>
-                <span>Remote</span>
-              </header>
+              <div class="content__list__item">
+                <header class="content__list__header">
+                  <h3>Front-End Developer, <a href="https://ottofeller.com">ottofeller</a></h3>
+                  <span>Remote</span>
+                </header>
+                <main>
+                  <span>02.2021 - by now</span>
+                </main>
+              </div>
             </li>
           </ul>
         </section>
@@ -283,12 +356,20 @@
         <section>
           <h2 class="aside__title">$ gh repo list --source --public</h2>
 
-          <ul class="employee-histroy">
+          <ul class="content__list">
             <li>
-              <header class="employee-history__header">
-                <h3>Front-End Developer, <a href="https://ottofeller.com">ottofeller</a></h3>
-                <span>Remote</span>
+              <header class="content__list__header" data-taglist="typescript,react.js">
+                <h3><a href="https://github.com/patchwork-body/3d-sapper">3D Minesweeper Game</a></h3>
               </header>
+
+              <main class="content__list__main">
+                <p>Like ordinary Minesweeper but in 3D!</p>
+                <ul class="inline-list">
+                  <li data-taglist="typescript">#Typescript</li>
+                  <li data-taglist="react.js">#React.js</li>
+                  <li data-taglist="react.js">#react-three-fiber</li>
+                </ul>
+              </main>
             </li>
           </ul>
         </section>
